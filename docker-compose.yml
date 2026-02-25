@@ -2,21 +2,27 @@ version: "3.9"
 
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hello-backend
     ports:
       - "8000:8000"
     volumes:
       - ./backend:/app
-    command: npm start
+      - /app/node_modules
     environment:
       - NODE_ENV=development
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: hello-frontend
     ports:
-      - "3000:3000"
+      - "3001:3000"
     volumes:
       - ./frontend:/app
-    command: npm start
+      - /app/node_modules
     environment:
       - NODE_ENV=development
